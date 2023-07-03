@@ -1,5 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+// core styles
+import "./scss/volt.scss";
 
 import App from "./App";
 
