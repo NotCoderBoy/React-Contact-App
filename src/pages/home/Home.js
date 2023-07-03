@@ -55,17 +55,15 @@ export default function Home(){
 
   return (
     <>
-      <Navbar variant="dark" expand="lg" bg="dark" className="navbar-transparent navbar-theme-primary sticky-top">
+      <Navbar variant="dark" expand="lg" bg="dark" className=" navbar-transparent navbar-theme-primary sticky-top">
         <Container className="position-relative justify-content-between px-3">
           <Navbar.Brand as={HashLink} to="#home" className="me-lg-3 d-flex align-items-center">
             <Image src={ReactHero} />
             <span className="ms-2 brand-text d-none d-md-inline">Volt React</span>
           </Navbar.Brand>
-
           <div className="d-flex align-items-center">
             <Navbar.Collapse id="navbar-default-primary">
               <Nav className="navbar-nav-hover align-items-lg-center">
-                  <a href="https://themesberg.com" target="_blank">fdffd</a>
                 <Nav.Link as={HashLink} to="#features">Features</Nav.Link>
                 <Nav.Link as={Link} to="#pages">Pages</Nav.Link>
                 <Nav.Link as={Link} to={paths.LOGIN}>Login</Nav.Link>
