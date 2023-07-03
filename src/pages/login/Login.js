@@ -21,6 +21,7 @@ import {
   InputGroup,
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
+import { paths } from "../../lib/routes";
 
 import BgImage from "../../assets/img/illustrations/signin.svg";
 
@@ -30,11 +31,7 @@ export default function Login() {
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
           <p className="text-center">
-            <Card.Link
-              as={Link}
-              // to={Routes.DashboardOverview.path}
-              className="text-gray-700"
-            >
+            <Card.Link as={Link} to={paths.ROOT} className="text-gray-700">
               <FontAwesomeIcon icon={faAngleLeft} className="me-2" /> Back to
               homepage
             </Card.Link>
@@ -128,7 +125,7 @@ export default function Login() {
                     Not registered?
                     <Card.Link
                       as={Link}
-                      // to={Routes.Signup.path}
+                      to={paths.REGISTER}
                       className="fw-bold"
                     >
                       {` Create account `}
