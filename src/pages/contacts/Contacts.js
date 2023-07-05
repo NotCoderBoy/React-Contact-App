@@ -6,13 +6,14 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Preloader from "../../components/Preloader";
 
-export default function Settings() {
+export default function Dashboard() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1000);
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
       <Preloader show={loaded ? false : true} />
@@ -20,7 +21,7 @@ export default function Settings() {
 
       <main className="content">
         <Navbar />
-        <div>Settings</div>
+        <div>Contacts</div>
         <Footer />
       </main>
     </>

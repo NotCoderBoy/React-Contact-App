@@ -139,17 +139,13 @@ export default (props = {}) => {
                 icon={faHandHoldingUsd}
                 link={paths.CONTACTS}
               />
-              <NavItem title="Settings" icon={faCog} link={paths.SETTINGS} />
 
               <Dropdown.Divider className="my-3 border-indigo" />
 
-              <NavItem
-                external
-                title="Themesberg"
-                link="https://themesberg.com"
-                target="_blank"
-                image={ThemesbergLogo}
-              />
+              <NavItem 
+              title="Settings" 
+              icon={faCog} 
+              link={paths.SETTINGS} />
             </Nav>
           </div>
         </SimpleBar>
