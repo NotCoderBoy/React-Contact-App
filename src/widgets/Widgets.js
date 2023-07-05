@@ -31,41 +31,7 @@ import {
 } from "@themesberg/react-bootstrap";
 
 import ProfileCover from "../assets/img/profile-cover.jpg";
-
-const teamMembers = [
-  {
-    id: 1,
-    image: ProfileCover,
-    name: "Christopher Wood",
-    statusKey: "online",
-    icon: faCalendarCheck,
-    btnText: "Invite",
-  },
-  {
-    id: 2,
-    image: ProfileCover,
-    name: "Jose Leos",
-    statusKey: "inMeeting",
-    icon: faComment,
-    btnText: "Message",
-  },
-  {
-    id: 3,
-    image: ProfileCover,
-    name: "Bonnie Green",
-    statusKey: "offline",
-    icon: faCalendarCheck,
-    btnText: "Invite",
-  },
-  {
-    id: 4,
-    image: ProfileCover,
-    name: "Neil Sims",
-    statusKey: "online",
-    icon: faComment,
-    btnText: "Message",
-  },
-];
+import teamMembers from "./data/teamMembers";
 
 export const ProfileCardWidget = () => {
   return (
