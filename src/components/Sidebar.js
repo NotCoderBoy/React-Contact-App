@@ -4,19 +4,10 @@ import { useLocation } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBook,
-  faBoxOpen,
-  faChartPie,
-  faCog,
-  faFileAlt,
-  faHandHoldingUsd,
-  faSignOutAlt,
-  faTable,
+  faLayerGroup,
+  faContactBook,
   faTimes,
-  faCalendarAlt,
-  faMapPin,
-  faInbox,
-  faRocket,
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   Nav,
@@ -24,7 +15,6 @@ import {
   Image,
   Button,
   Dropdown,
-  Accordion,
   Navbar,
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
@@ -132,20 +122,17 @@ export default (props = {}) => {
               <NavItem
                 title="Overview"
                 link={paths.DASHBOARD}
-                icon={faChartPie}
+                icon={faLayerGroup}
               />
               <NavItem
-                title="Transactions"
-                icon={faHandHoldingUsd}
+                title="Contacts"
+                icon={faContactBook}
                 link={paths.CONTACTS}
               />
 
               <Dropdown.Divider className="my-3 border-indigo" />
 
-              <NavItem 
-              title="Settings" 
-              icon={faCog} 
-              link={paths.SETTINGS} />
+              <NavItem title="Settings" icon={faCog} link={paths.SETTINGS} />
             </Nav>
           </div>
         </SimpleBar>
