@@ -1,27 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import {
-  faCashRegister,
-  faChartLine,
-  faCloudUploadAlt,
-  faPlus,
-  faRocket,
-  faTasks,
-  faUserShield,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  Col,
-  Row,
-  Button,
-  Dropdown,
-  ButtonGroup,
-} from "@themesberg/react-bootstrap";
+import { faCashRegister, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { Col, Row } from "@themesberg/react-bootstrap";
 import {
   CounterWidget,
   TeamMembersWidget,
   ProgressTrackWidget,
 } from "../../widgets/Widgets";
+
 import { PageVisitsTable } from "../../widgets/Tables";
 
 // components

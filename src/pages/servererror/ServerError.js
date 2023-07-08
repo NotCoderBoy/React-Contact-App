@@ -10,7 +10,7 @@ import {
 } from "@themesberg/react-bootstrap";
 import { Link } from "react-router-dom";
 
-import { Routes } from "../../lib/routes";
+import { paths } from "../../lib/routes";
 import ErrorImage from "../../assets/img/illustrations/500.svg";
 
 export default function ServerError() {

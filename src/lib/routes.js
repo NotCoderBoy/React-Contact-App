@@ -14,7 +14,7 @@ export const paths = {
   ROOT: "/",
   LOGIN: "/login",
   REGISTER: "/register",
-  NOTFOUND: "/404",
+  NOTFOUND: "*",
   SERVERERROR: "/500",
   LOCKPROFILE: "/locked",
   DASHBOARD: "/dashboard",
@@ -41,8 +41,8 @@ const UnProtectedRoute = ({ children }) => {
 
 export const router = createBrowserRouter([
   { path: paths.ROOT, element: <Home /> },
-  { path: paths.ROOT, element: <NotFound /> },
-  { path: paths.ROOT, element: <ServerError /> },
+  { path: paths.NOTFOUND, element: <NotFound /> },
+  { path: paths.SERVERERROR, element: <ServerError /> },
   {
     path: paths.LOGIN,
     element: (

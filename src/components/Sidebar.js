@@ -20,9 +20,7 @@ import {
 import { Link } from "react-router-dom";
 
 import { paths } from "lib/routes";
-import ThemesbergLogo from "../assets/img/themesberg.svg";
-import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
-import ProfilePicture from "../assets/img/technologies/react-hero-logo.svg";
+import Logo from "../assets/img/Logo.png";
 
 export default (props = {}) => {
   const location = useLocation();
@@ -93,7 +91,8 @@ export default (props = {}) => {
         className="navbar-theme-primary px-4 d-md-none"
       >
         <Navbar.Brand className="me-lg-5" as={Link} to={paths.DASHBOARD}>
-          <Image src={ReactHero} className="navbar-brand-light" />
+          <Image src={Logo} className="navbar-brand-light me-2" />
+          Contact App
         </Navbar.Brand>
         <Navbar.Toggle
           as={Button}
@@ -117,8 +116,8 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="Volt React" link={paths.ROOT} image={ReactHero} />
-
+              <NavItem title="Contact App" link={paths.ROOT} image={Logo} />
+              <Dropdown.Divider className="my-3 border-indigo" />
               <NavItem
                 title="Overview"
                 link={paths.DASHBOARD}
@@ -129,8 +128,6 @@ export default (props = {}) => {
                 icon={faContactBook}
                 link={paths.CONTACTS}
               />
-
-              <Dropdown.Divider className="my-3 border-indigo" />
 
               <NavItem title="Settings" icon={faCog} link={paths.SETTINGS} />
             </Nav>

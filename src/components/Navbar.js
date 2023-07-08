@@ -10,16 +10,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import {
-  Row,
-  Col,
   Nav,
-  Form,
   Image,
   Navbar,
   Dropdown,
   Container,
-  ListGroup,
-  InputGroup,
 } from "@themesberg/react-bootstrap";
 
 import Profile from "../assets/img/react-mockup.png";

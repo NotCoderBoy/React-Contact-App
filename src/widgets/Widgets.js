@@ -3,16 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
   faAngleUp,
-  faChartArea,
-  faChartBar,
-  faChartLine,
-  faFlagUsa,
-  faFolderOpen,
   faGlobeEurope,
   faPaperclip,
   faUserPlus,
-  faCalendarCheck,
-  faComment,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faAngular,
@@ -265,104 +258,6 @@ export const ProgressTrackWidget = () => {
           icon={faBootstrap}
           percentage={34}
         />
-      </Card.Body>
-    </Card>
-  );
-};
-
-export const RankingWidget = () => {
-  return (
-    <Card border="light" className="shadow-sm">
-      <Card.Body>
-        <div className="d-flex align-items-center justify-content-between border-bottom border-light pb-3">
-          <div>
-            <h6>
-              <FontAwesomeIcon
-                icon={faGlobeEurope}
-                className="icon icon-xs me-3"
-              />{" "}
-              Global Rank
-            </h6>
-          </div>
-          <div>
-            <Card.Link href="#" className="text-primary fw-bold">
-              #755 <FontAwesomeIcon icon={faChartLine} className="ms-2" />
-            </Card.Link>
-          </div>
-        </div>
-        <div className="d-flex align-items-center justify-content-between border-bottom border-light py-3">
-          <div>
-            <h6 className="mb-0">
-              <FontAwesomeIcon icon={faFlagUsa} className="icon icon-xs me-3" />
-              Country Rank
-            </h6>
-            <div className="small card-stats">
-              United States{" "}
-              <FontAwesomeIcon
-                icon={faAngleUp}
-                className="icon icon-xs text-success ms-2"
-              />
-            </div>
-          </div>
-          <div>
-            <Card.Link href="#top" className="text-primary fw-bold">
-              #32 <FontAwesomeIcon icon={faChartLine} className="ms-2" />
-            </Card.Link>
-          </div>
-        </div>
-        <div className="d-flex align-items-center justify-content-between pt-3">
-          <div>
-            <h6 className="mb-0">
-              <FontAwesomeIcon
-                icon={faFolderOpen}
-                className="icon icon-xs me-3"
-              />
-              Category Rank
-            </h6>
-            <Card.Link href="#top" className="small card-stats">
-              Travel &gt; Accomodation
-            </Card.Link>
-          </div>
-          <div>
-            <Card.Link href="#top" className="text-primary fw-bold">
-              #16 <FontAwesomeIcon icon={faChartLine} className="ms-2" />
-            </Card.Link>
-          </div>
-        </div>
-      </Card.Body>
-    </Card>
-  );
-};
-
-export const AcquisitionWidget = () => {
-  return (
-    <Card border="light" className="shadow-sm">
-      <Card.Body>
-        <h5>Acquisition</h5>
-        <p>
-          Tells you where your visitors originated from, such as search engines,
-          social networks or website referrals.
-        </p>
-        <div className="d-block">
-          <div className="d-flex align-items-center pt-3 me-5">
-            <div className="icon icon-shape icon-sm icon-shape-danger rounded me-3">
-              <FontAwesomeIcon icon={faChartBar} />
-            </div>
-            <div className="d-block">
-              <label className="mb-0">Bounce Rate</label>
-              <h4 className="mb-0">33.50%</h4>
-            </div>
-          </div>
-          <div className="d-flex align-items-center pt-3">
-            <div className="icon icon-shape icon-sm icon-shape-quaternary rounded me-3">
-              <FontAwesomeIcon icon={faChartArea} />
-            </div>
-            <div className="d-block">
-              <label className="mb-0">Sessions</label>
-              <h4 className="mb-0">9,567</h4>
-            </div>
-          </div>
-        </div>
       </Card.Body>
     </Card>
   );
