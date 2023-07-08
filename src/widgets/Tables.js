@@ -248,7 +248,7 @@ export const RankingTable = () => {
   );
 };
 
-export const TransactionsTable = () => {
+export const ContactTable = () => {
   const totalTransactions = transactions.length;
 
   const TableRow = (props) => {

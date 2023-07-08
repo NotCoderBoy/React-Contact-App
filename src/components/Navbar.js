@@ -22,7 +22,7 @@ import {
   InputGroup,
 } from "@themesberg/react-bootstrap";
 
-import Profile3 from "../assets/img/react-mockup.png";
+import Profile from "../assets/img/react-mockup.png";
 
 export default (props) => {
   return (
@@ -30,7 +30,7 @@ export default (props) => {
       <Container fluid className="px-0">
         <div className="d-flex justify-content-between w-100">
           <div className="d-flex align-items-center">
-            <Form className="navbar-search">
+            {/* <Form className="navbar-search">
               <Form.Group id="topbarSearch">
                 <InputGroup className="input-group-merge search-bar">
                   <InputGroup.Text>
@@ -39,14 +39,14 @@ export default (props) => {
                   <Form.Control type="text" placeholder="Search" />
                 </InputGroup>
               </Form.Group>
-            </Form>
+            </Form> */}
           </div>
           <Nav className="align-items-center">
             <Dropdown as={Nav.Item}>
               <Dropdown.Toggle as={Nav.Link} className="pt-1 px-0">
                 <div className="media d-flex align-items-center">
                   <Image
-                    src={Profile3}
+                    src={Profile}
                     className="user-avatar md-avatar rounded-circle"
                   />
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
@@ -67,10 +67,6 @@ export default (props) => {
                 <Dropdown.Item className="fw-bold">
                   <FontAwesomeIcon icon={faEnvelopeOpen} className="me-2" />{" "}
                   Messages
-                </Dropdown.Item>
-                <Dropdown.Item className="fw-bold">
-                  <FontAwesomeIcon icon={faUserShield} className="me-2" />{" "}
-                  Support
                 </Dropdown.Item>
 
                 <Dropdown.Divider />
