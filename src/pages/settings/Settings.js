@@ -40,7 +40,7 @@ export default function Settings() {
                 <Breadcrumb.Item>
                   <FontAwesomeIcon icon={faHome} />
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>Volt</Breadcrumb.Item>
+                <Breadcrumb.Item>App</Breadcrumb.Item>
                 <Breadcrumb.Item active>Settings</Breadcrumb.Item>
               </Breadcrumb>
               <h4>Settings</h4>
