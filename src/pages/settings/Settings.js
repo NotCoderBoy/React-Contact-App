@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import {
-  Col,
-  Row,
-  Button,
-  Dropdown,
-  Breadcrumb,
-} from "@themesberg/react-bootstrap";
+import { Col, Row, Breadcrumb } from "@themesberg/react-bootstrap";
 
 import { ChoosePhotoWidget, ProfileCardWidget } from "../../widgets/Widgets";
 import { GeneralInfoForm } from "../../widgets/Forms";
