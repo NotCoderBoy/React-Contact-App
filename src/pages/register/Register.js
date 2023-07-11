@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
   faEnvelope,
   faUnlockAlt,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookF,
@@ -26,8 +27,37 @@ import { paths } from "../../lib/routes";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 
 export default function Register() {
+  const [user, setUser] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+    reEnterPassword: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+
+  const register = () => {
+    const { name, email, password, reEnterPassword } = user;
+    if (name && email && password && password === reEnterPassword) {
+      axios.post("http://localhost:9002/register", user).then((res) => {
+        alert(res.data.message);
+        history.push("/login");
+      });
+    } else {
+      alert("invlid input");
+    }
+  };
+
   return (
     <main>
+      {console.log("User", user)}
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
           <p className="text-center">
@@ -49,6 +79,46 @@ export default function Register() {
                   <h3 className="mb-0">Create an account</h3>
                 </div>
                 <Form className="mt-4">
+                  <Row>
+                    <Col>
+                      <Form.Group id="fname" className="mb-4">
+                        <Form.Label>First Name</Form.Label>
+                        <InputGroup>
+                          <InputGroup.Text>
+                            <FontAwesomeIcon icon={faUser} />
+                          </InputGroup.Text>
+                          <Form.Control
+                            autoFocus
+                            required
+                            type="text"
+                            placeholder="First Name"
+                            name="fname"
+                            value={user.fname}
+                            onChange={handleChange}
+                          />
+                        </InputGroup>
+                      </Form.Group>
+                    </Col>
+                    <Col>
+                      <Form.Group id="lname" className="mb-4">
+                        <Form.Label>Last Name</Form.Label>
+                        <InputGroup>
+                          <InputGroup.Text>
+                            <FontAwesomeIcon icon={faUser} />
+                          </InputGroup.Text>
+                          <Form.Control
+                            autoFocus
+                            required
+                            type="text"
+                            placeholder="Last Name"
+                            name="lname"
+                            value={user.lname}
+                            onChange={handleChange}
+                          />
+                        </InputGroup>
+                      </Form.Group>
+                    </Col>
+                  </Row>
                   <Form.Group id="email" className="mb-4">
                     <Form.Label>Your Email</Form.Label>
                     <InputGroup>
@@ -60,6 +130,9 @@ export default function Register() {
                         required
                         type="email"
                         placeholder="example@company.com"
+                        name="email"
+                        value={user.email}
+                        onChange={handleChange}
                       />
                     </InputGroup>
                   </Form.Group>
@@ -73,6 +146,9 @@ export default function Register() {
                         required
                         type="password"
                         placeholder="Password"
+                        name="password"
+                        value={user.password}
+                        onChange={handleChange}
                       />
                     </InputGroup>
                   </Form.Group>
@@ -86,6 +162,9 @@ export default function Register() {
                         required
                         type="password"
                         placeholder="Confirm Password"
+                        name="reEnterPassword"
+                        value={user.reEnterPassword}
+                        onChange={handleChange}
                       />
                     </InputGroup>
                   </Form.Group>
