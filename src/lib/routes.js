@@ -22,7 +22,7 @@ export const paths = {
   CONTACTS: "/dashboard/contacts",
 };
 
-const user = true;
+const user = false;
 const ProtectedRoute = ({ children }) => {
   if (!user) {
     // user is not authenticated

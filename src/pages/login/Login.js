@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -26,8 +26,41 @@ import { paths } from "../../lib/routes";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 
 export default function Login() {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+
+  const login = () => {
+    axios.post("http://localhost:9002/login", user).then((res) => {
+      alert(res.data.message);
+      setLoginUser(res.data.user);
+      history.push("/");
+    });
+  };
+
+  const loginSubmit = async () => {
+    try {
+      const res = await axios.post(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+      setMyData(res.data);
+    } catch (error) {
+      setIsError(error.message);
+    }
+  };
+
   return (
     <main>
+      {console.log("User", user)}
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
           <p className="text-center">
@@ -60,6 +93,9 @@ export default function Login() {
                         required
                         type="email"
                         placeholder="example@company.com"
+                        name="email"
+                        value={user.email}
+                        onChange={handleChange}
                       />
                     </InputGroup>
                   </Form.Group>
@@ -74,6 +110,9 @@ export default function Login() {
                           required
                           type="password"
                           placeholder="Password"
+                          name="password"
+                          value={user.password}
+                          onChange={handleChange}
                         />
                       </InputGroup>
                     </Form.Group>
