@@ -54,7 +54,7 @@ export default function Register() {
         );
         console.log(res);
       } else {
-        // alert("fill all");
+        alert(process.env.REACT_APP_BACKEND_URL + "api/register");
       }
     } catch (error) {
       alert(error.message);
