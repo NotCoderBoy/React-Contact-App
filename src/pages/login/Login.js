@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -39,20 +40,13 @@ export default function Login() {
     });
   };
 
-  const login = () => {
-    axios.post("http://localhost:9002/login", user).then((res) => {
-      alert(res.data.message);
-      setLoginUser(res.data.user);
-      history.push("/");
-    });
-  };
-
-  const loginSubmit = async () => {
+  const submitLogin = async () => {
     try {
       const res = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts"
+        process.env.REACT_APP_BACKEND_URL + "api/login",
+        user
       );
-      setMyData(res.data);
+      console.log(res);
     } catch (error) {
       setIsError(error.message);
     }
@@ -131,7 +125,12 @@ export default function Login() {
                       </Card.Link>
                     </div>
                   </Form.Group>
-                  <Button variant="primary" type="submit" className="w-100">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="w-100"
+                    onClick={submitLogin}
+                  >
                     Sign in
                   </Button>
                 </Form>

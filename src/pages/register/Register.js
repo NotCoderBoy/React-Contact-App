@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -43,15 +44,20 @@ export default function Register() {
     });
   };
 
-  const register = () => {
-    const { name, email, password, reEnterPassword } = user;
-    if (name && email && password && password === reEnterPassword) {
-      axios.post("http://localhost:9002/register", user).then((res) => {
-        alert(res.data.message);
-        history.push("/login");
-      });
-    } else {
-      alert("invlid input");
+  const submitRegister = async () => {
+    try {
+      const { fname, lname, email, password, reEnterPassword } = user;
+      if (fname && lname && email && password && password === reEnterPassword) {
+        const res = await axios.post(
+          process.env.REACT_APP_BACKEND_URL + "api/register",
+          user
+        );
+        console.log(res);
+      } else {
+        alert(process.env.REACT_APP_BACKEND_URL + "api/register");
+      }
+    } catch (error) {
+      alert(error.message);
     }
   };
 
@@ -175,7 +181,12 @@ export default function Register() {
                     </FormCheck.Label>
                   </FormCheck>
 
-                  <Button variant="primary" type="submit" className="w-100">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="w-100"
+                    onClick={submitRegister}
+                  >
                     Sign up
                   </Button>
                 </Form>
