@@ -26,12 +26,13 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../lib/routes";
 
 import BgImage from "../../assets/img/illustrations/signin.svg";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -67,11 +68,15 @@ export default function Login() {
               theme: "light",
             });
             localStorage.setItem("token", response.data.token);
-
-            // navigate("/login", { replace: true });
+            setTimeout(() => {
+              navigate("/dashboard", { replace: true });
+            }, 5000);
           })
           .catch((error) => {
-            toast.error(error.response.data.message, {
+            if (error.response.status == 400) {
+              error.message = error.response.data.message;
+            }
+            toast.error(error.message, {
               position: "top-center",
               autoClose: 5000,
               hideProgressBar: false,

@@ -81,11 +81,15 @@ export default function Register() {
                 progress: undefined,
                 theme: "light",
               });
-
-              // navigate("/login", { replace: true });
+              setTimeout(() => {
+                navigate("/login", { replace: true });
+              }, 5000);
             })
             .catch((error) => {
-              toast.error(error.response.data.message, {
+              if (error.response.status == 400) {
+                error.message = error.response.data.message;
+              }
+              toast.error(error.message, {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -97,7 +101,7 @@ export default function Register() {
               });
             });
         } else {
-          toast.error("Password Not Mached!!!", {
+          toast.error("Password Not Matched!!!", {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
