@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -21,6 +22,10 @@ import {
   Container,
   InputGroup,
 } from "@themesberg/react-bootstrap";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { Link } from "react-router-dom";
 import { paths } from "../../lib/routes";
 
@@ -40,21 +45,71 @@ export default function Login() {
     });
   };
 
-  const submitLogin = async () => {
+  const submitLogin = async (e) => {
+    e.preventDefault();
     try {
-      const res = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + "api/login",
-        user
-      );
-      console.log(res);
+      const { email, password } = user;
+      if (email && password) {
+        await axios
+          .post("/api/login", {
+            email,
+            password,
+          })
+          .then((response) => {
+            toast.success(response.data.message, {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            localStorage.setItem("token", response.data.token);
+
+            // navigate("/login", { replace: true });
+          })
+          .catch((error) => {
+            toast.error(error.response.data.message, {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          });
+      } else {
+        toast.error("All fields are required!!!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     } catch (error) {
-      setIsError(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
   return (
     <main>
-      {console.log("User", user)}
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
           <p className="text-center">
@@ -75,7 +130,19 @@ export default function Login() {
                 <div className="text-center text-md-center mb-4 mt-md-0">
                   <h3 className="mb-0">Sign in to our platform</h3>
                 </div>
-                <Form className="mt-4">
+                <ToastContainer
+                  position="top-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
+                <Form className="mt-4" onSubmit={submitLogin}>
                   <Form.Group id="email" className="mb-4">
                     <Form.Label>Your Email</Form.Label>
                     <InputGroup>
@@ -125,12 +192,7 @@ export default function Login() {
                       </Card.Link>
                     </div>
                   </Form.Group>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="w-100"
-                    onClick={submitLogin}
-                  >
+                  <Button variant="primary" type="submit" className="w-100">
                     Sign in
                   </Button>
                 </Form>
