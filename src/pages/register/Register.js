@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -22,12 +23,18 @@ import {
   Container,
   InputGroup,
 } from "@themesberg/react-bootstrap";
-import { Link } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../lib/routes";
 
 import BgImage from "../../assets/img/illustrations/signin.svg";
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     fname: "",
     lname: "",
@@ -44,26 +51,91 @@ export default function Register() {
     });
   };
 
-  const submitRegister = async () => {
+  const [checked, setChecked] = useState(false);
+  const handleTandCChange = () => {
+    setChecked(!checked);
+    // console.log(!checked);
+  };
+
+  const submitRegister = async (e) => {
+    e.preventDefault();
     try {
       const { fname, lname, email, password, reEnterPassword } = user;
-      if (fname && lname && email && password && password === reEnterPassword) {
-        const res = await axios.post(
-          process.env.REACT_APP_BACKEND_URL + "api/register",
-          user
-        );
-        console.log(res);
+      if (fname && lname && email && password && reEnterPassword && checked) {
+        if (password == reEnterPassword) {
+          await axios
+            .post("/api/register", {
+              firstName: fname,
+              lastName: lname,
+              email,
+              password,
+            })
+            .then((response) => {
+              toast.success(response.data.message, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+
+              // navigate("/login", { replace: true });
+            })
+            .catch((error) => {
+              toast.error(error.response.data.message, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            });
+        } else {
+          toast.error("Password Not Mached!!!", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
       } else {
-        alert(process.env.REACT_APP_BACKEND_URL + "api/register");
+        toast.error("All fields are required!!!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
   return (
     <main>
-      {console.log("User", user)}
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
           <p className="text-center">
@@ -84,7 +156,19 @@ export default function Register() {
                 <div className="text-center text-md-center mb-4 mt-md-0">
                   <h3 className="mb-0">Create an account</h3>
                 </div>
-                <Form className="mt-4">
+                <ToastContainer
+                  position="top-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
+                <Form className="mt-4" onSubmit={submitRegister}>
                   <Row>
                     <Col>
                       <Form.Group id="fname" className="mb-4">
@@ -175,18 +259,18 @@ export default function Register() {
                     </InputGroup>
                   </Form.Group>
                   <FormCheck type="checkbox" className="d-flex mb-4">
-                    <FormCheck.Input required id="terms" className="me-2" />
+                    <FormCheck.Input
+                      onClick={handleTandCChange}
+                      required
+                      id="terms"
+                      className="me-2"
+                    />
                     <FormCheck.Label htmlFor="terms">
                       I agree to the <Card.Link>terms and conditions</Card.Link>
                     </FormCheck.Label>
                   </FormCheck>
 
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="w-100"
-                    onClick={submitRegister}
-                  >
+                  <Button variant="primary" type="submit" className="w-100">
                     Sign up
                   </Button>
                 </Form>
