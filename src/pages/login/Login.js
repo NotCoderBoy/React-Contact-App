@@ -23,11 +23,9 @@ import {
   InputGroup,
 } from "@themesberg/react-bootstrap";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../lib/routes";
+import { CustomToast } from "widgets/Toast";
 
 import BgImage from "../../assets/img/illustrations/signin.svg";
 
@@ -57,17 +55,9 @@ export default function Login() {
             password,
           })
           .then((response) => {
-            toast.success(response.data.message, {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
+            CustomToast({ type: "success", msg: response.data.message });
             localStorage.setItem("token", response.data.token);
+
             setTimeout(() => {
               navigate("/dashboard", { replace: true });
             }, 5000);
@@ -76,40 +66,13 @@ export default function Login() {
             if (error.response.status == 400) {
               error.message = error.response.data.message;
             }
-            toast.error(error.message, {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
+            CustomToast({ type: "error", msg: error.message });
           });
       } else {
-        toast.error("All fields are required!!!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        CustomToast({ type: "error", msg: "All fields are required!!!" });
       }
     } catch (error) {
-      toast.error(error.message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      CustomToast({ type: "error", msg: error.message });
     }
   };
 
@@ -135,18 +98,6 @@ export default function Login() {
                 <div className="text-center text-md-center mb-4 mt-md-0">
                   <h3 className="mb-0">Sign in to our platform</h3>
                 </div>
-                <ToastContainer
-                  position="top-center"
-                  autoClose={5000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                  theme="light"
-                />
                 <Form className="mt-4" onSubmit={submitLogin}>
                   <Form.Group id="email" className="mb-4">
                     <Form.Label>Your Email</Form.Label>
