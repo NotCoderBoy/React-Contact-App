@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -18,8 +21,33 @@ import {
 } from "@themesberg/react-bootstrap";
 
 import Profile from "../assets/img/react-mockup.png";
+import { CustomToast } from "widgets/Toast";
 
 export default (props) => {
+  const navigate = useNavigate();
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .get("/api/logout")
+        .then((response) => {
+          CustomToast({ type: "success", msg: response.data.message });
+
+          setTimeout(() => {
+            navigate("/login", { replace: true });
+          }, 5000);
+        })
+        .catch((error) => {
+          if (error.response.status == 400) {
+            error.message = error.response.data.message;
+          }
+          CustomToast({ type: "error", msg: error.message });
+        });
+    } catch (error) {
+      CustomToast({ type: "error", msg: error.message });
+    }
+  };
+
   return (
     <Navbar variant="dark" expanded className="ps-0 pe-2 pb-0">
       <Container fluid className="px-0">
@@ -66,7 +94,7 @@ export default (props) => {
 
                 <Dropdown.Divider />
 
-                <Dropdown.Item className="fw-bold">
+                <Dropdown.Item className="fw-bold" onClick={handleLogout}>
                   <FontAwesomeIcon
                     icon={faSignOutAlt}
                     className="text-danger me-2"

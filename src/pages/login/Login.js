@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+// axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -46,21 +46,28 @@ export default function Login() {
 
   const submitLogin = async (e) => {
     e.preventDefault();
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredential: true,
+    };
     try {
       const { email, password } = user;
       if (email && password) {
         await axios
-          .post("/api/login", {
-            email,
-            password,
-          })
+          .post(
+            "https://3pxhyp-8080.csb.app/api/login",
+            {
+              email,
+              password,
+            },
+            config
+          )
           .then((response) => {
             CustomToast({ type: "success", msg: response.data.message });
-            localStorage.setItem("token", response.data.token);
 
             setTimeout(() => {
               navigate("/dashboard", { replace: true });
-            }, 5000);
+            }, 1000);
           })
           .catch((error) => {
             if (error.response.status == 400) {

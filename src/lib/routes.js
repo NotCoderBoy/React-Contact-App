@@ -1,4 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import axios from "axios";
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 import Login from "pages/login/Login";
 import Register from "pages/register/Register";
 import Home from "pages/home/Home";
@@ -21,9 +23,23 @@ export const paths = {
   SETTINGS: "/dashboard/settings",
   CONTACTS: "/dashboard/contacts",
 };
-
-const user = false;
+const config = {
+  headers: { "Content-Type": "application/json" },
+  withCredential: true,
+};
 const ProtectedRoute = ({ children }) => {
+  let user;
+
+  axios
+    .get("/api/verify", config)
+    .then((response) => {
+      user = true;
+      console.log(response);
+    })
+    .catch((error) => {
+      user = false;
+      console.log(error);
+    });
   if (!user) {
     // user is not authenticated
     return <Navigate to="/login" />;
@@ -32,6 +48,17 @@ const ProtectedRoute = ({ children }) => {
 };
 
 const UnProtectedRoute = ({ children }) => {
+  let user;
+  axios
+    .get("/api/verify", config)
+    .then((response) => {
+      user = true;
+      console.log(response);
+    })
+    .catch((error) => {
+      user = false;
+      console.log(error);
+    });
   if (user) {
     // user is not authenticated
     return <Navigate to="/dashboard" />;
